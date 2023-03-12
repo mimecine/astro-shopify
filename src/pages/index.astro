@@ -1,17 +1,22 @@
 ---
-import { getProducts } from "./../utils/shopify";
+import { getProducts, getProductsByCollectionHandle } from "./../utils/shopify";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Products from "../components/Products.astro";
+import Collection from "../components/Collection.astro";
 import { setCache } from "../utils/cache";
 
 const title = "Astro + Shopify";
 const headers = Astro.request.headers;
 const ip = headers.get("x-vercel-forwarded-for") || Astro.clientAddress;
-const products = await getProducts({ buyerIP: ip });
+// const products = await getProducts({ buyerIP: ip });
+const products = await getProductsByCollectionHandle({
+  handle: "things",
+  buyerIP: ip,
+});
 
 setCache.short(Astro);
 ---
 
 <BaseLayout title={title}>
-  <Products products={products} />
+  <Collection products={products} />
 </BaseLayout>

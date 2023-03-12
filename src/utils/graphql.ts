@@ -95,6 +95,21 @@ query ($first: Int!) {
   ${PRODUCT_FRAGMENT}
 `;
 
+export const CollectionQuery = `
+  query ($first: Int = 20, $handle: String = "things") {
+    collection(handle: $handle){
+      products(first: $first) {
+        edges {
+          node {
+            ...productFragment
+          }
+        }
+      }
+    }
+  }
+  ${PRODUCT_FRAGMENT}
+`;
+
 export const ProductByHandleQuery = `
   query ($handle: String!) {
     productByHandle(handle: $handle) {

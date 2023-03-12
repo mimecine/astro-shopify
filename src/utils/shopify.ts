@@ -3,6 +3,7 @@ import { CartResult, ProductResult } from "./schemas";
 import { config } from "./config";
 import {
   ProductsQuery,
+  CollectionQuery,
   ProductByHandleQuery,
   CreateCartMutation,
   AddCartLinesMutation,
@@ -76,6 +77,32 @@ export const getProducts = async (options: {
   const data = await makeShopifyRequest(
     ProductsQuery,
     { first: limit },
+    buyerIP
+  );
+  const { products } = data;
+
+  if (!products) {
+    throw new Error("No products found");
+  }
+
+  const productsList = products.edges.map((edge: any) => edge.node);
+  const ProductsResult = z.array(ProductResult);
+  const parsedProducts = ProductsResult.parse(productsList);
+
+  return parsedProducts;
+};
+
+// Get all products for a collection or a limited number of products (default: 10)
+export const getProductsByCollectionHandle = async (options: {
+  limit?: number;
+  buyerIP: string;
+  handle?: string;
+}) => {
+  const { limit = 10, buyerIP, handle = 'things' } = options;
+
+  const data = await makeShopifyRequest(
+    CollectionQuery,
+    { first: limit, handle: handle },
     buyerIP
   );
   const { products } = data;
