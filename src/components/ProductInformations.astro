@@ -6,6 +6,7 @@ import Money from "./Money.svelte";
 export interface Props {
   price?: z.infer<typeof MoneyV2Result>;
   title: string;
+  descriptionHtml: string;
 }
 const { price, title, descriptionHtml } = Astro.props as Props;
 ---
