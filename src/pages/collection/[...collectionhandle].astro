@@ -15,8 +15,7 @@ import ProductAccordions from "../../components/ProductAccordions.astro";
 const { handle } = Astro.params;
 const headers = Astro.request.headers;
 const ip = headers.get("x-vercel-forwarded-for") || Astro.clientAddress;
-const product = await getProductByHandle({ handle: handle || "", buyerIP: ip });
-
+const product = await getProductByHandle({ handle: collectionhandle || "", buyerIP: ip });
 
 if (!product) {
   Astro.response.status = 404;
@@ -45,7 +44,6 @@ setCache.short(Astro);
             <ProductInformations
               title={product.title}
               price={firstVariant?.priceV2}
-              descriptionHtml={product.descriptionHtml}
             />
 
             <div>

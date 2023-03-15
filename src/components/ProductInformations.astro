@@ -7,7 +7,7 @@ export interface Props {
   price?: z.infer<typeof MoneyV2Result>;
   title: string;
 }
-const { price, title } = Astro.props as Props;
+const { price, title, descriptionHtml } = Astro.props as Props;
 ---
 
 <h1 class="text-2xl font-bold text-zinc-800 sm:text-4xl">
@@ -17,9 +17,13 @@ const { price, title } = Astro.props as Props;
   <Money price={price} />
 </p>
 
+<div class="prose">
+{descriptionHtml}
+</div>
+
 <!-- Reviews -->
 <div class="mt-4">
-  <div class="flex items-center gap-4">
+  <!-- <div class="flex items-center gap-4">
     <div class="flex">
       <svg
         class="h-5 w-5 text-yellow-400"
@@ -86,5 +90,5 @@ const { price, title } = Astro.props as Props;
         rel="noopener noreferer">website</a
       > to purchase this product.
     </p>
-  </div>
+  </div> -->
 </div>

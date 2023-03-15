@@ -7,16 +7,16 @@ import { setCache } from "../utils/cache";
 
 const title = "Astro + Shopify";
 const headers = Astro.request.headers;
-const ip = headers.get("x-vercel-forwarded-for") || Astro.clientAddress;
-// const products = await getProducts({ buyerIP: ip });
-const products = await getProductsByCollectionHandle({
-  handle: "things",
-  buyerIP: ip,
-});
+const ip = headers.get("X-NF-Client-Connection-Ip"); // || Astro.clientAddress;
+const products = await getProducts({ buyerIP: ip, limit: 100 });
+// const products = await getProductsByCollectionHandle({
+//   handle: "things",
+//   buyerIP: ip
+// });
 
 setCache.short(Astro);
 ---
 
 <BaseLayout title={title}>
-  <Collection products={products} />
+  <Products products={products} />
 </BaseLayout>

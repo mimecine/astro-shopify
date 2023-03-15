@@ -53,6 +53,8 @@ fragment productFragment on Product {
   id
   title
   handle
+  description
+  descriptionHtml
   images (first: 10) {
     nodes {
       url(transform: {preferredContentType: WEBP})

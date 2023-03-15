@@ -16,7 +16,7 @@ const { images } = Astro.props as Props;
 <div class="grid gap-4 md:grid-cols-8 lg:gap-6">
   <div class="md:order-2 md:col-span-6">
     <ShopifyImage
-      classList="overflow-hidden rounded-lg h-full object-cover"
+      classList="overflow-hidden h-full object-cover border border-black"
       loading="eager"
       image={images.nodes[0]}
       sizes={`
@@ -46,7 +46,7 @@ const { images } = Astro.props as Props;
       images.nodes.map((image, index) => {
         if (index < 3) {
           return (
-            <div class="overflow-hidden rounded-lg">
+            <div class="overflow-hidden border border-black">
               <ShopifyImage
                 classList=""
                 loading="eager"
