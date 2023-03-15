@@ -6,9 +6,10 @@ import Money from "./Money.svelte";
 export interface Props {
   price?: z.infer<typeof MoneyV2Result>;
   title: string;
+  description: string;
   descriptionHtml: string;
 }
-const { price, title, descriptionHtml } = Astro.props as Props;
+const { price, title, description, descriptionHtml } = Astro.props as Props;
 ---
 
 <h1 class="text-2xl font-bold text-zinc-800 sm:text-4xl">
